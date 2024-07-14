@@ -1,10 +1,10 @@
-FROM python:3.9-slim
+FROM python:3-slim
 
 WORKDIR /simulator
 
 COPY . .
 
-CMD ["python", "robots/main.py"]
+CMD ["python", "src/main.py"]
 
 
 
