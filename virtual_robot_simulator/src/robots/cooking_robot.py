@@ -1,17 +1,20 @@
-from robots.base_robot import BaseRobot
+# src/robots/cooking_robot.py
 
-class CookingRobot(BaseRobot):
-    def __init__(self, name: str, battery_level: int, status: str, cooking_skill:str) -> None:
-        super().__init__(name, battery_level, status)
-        self.cooking_skill = cooking_skill
+from .base_robot import Robot
 
-    def work(self):
-        if self.battery_level > 30:
-            print("Let me cook...")
-            self.battery_level -= 30
+class CookingRobot(Robot):
+    def __init__(self, name: str, cooking_skill: str):
+        super().__init__(name)
+        self._cooking_skill = cooking_skill
+
+    @property
+    def cooking_skill(self) -> str:
+        return self._cooking_skill
+
+    def work(self) -> None:
+        if self._battery_level >= 30:
+            self._battery_level -= 30
+            self._status = "working"
+            print(f"{self._name} is cooking with {self._cooking_skill} skills.")
         else:
-            print("Can't cook, battery too low!")
-    
-    
-
-
+            print(f"{self._name} does not have enough battery to cook.")
