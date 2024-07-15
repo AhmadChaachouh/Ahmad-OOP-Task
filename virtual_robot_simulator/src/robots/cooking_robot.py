@@ -3,8 +3,8 @@
 from .base_robot import Robot
 
 class CookingRobot(Robot):
-    def __init__(self, name: str, cooking_skill: str):
-        super().__init__(name)
+    def __init__(self, name: str, cooking_skill: str, *args, **kwargs):
+        super().__init__(name, *args, **kwargs)
         self._cooking_skill = cooking_skill
 
     @property
@@ -12,9 +12,9 @@ class CookingRobot(Robot):
         return self._cooking_skill
 
     def work(self) -> None:
-        if self._battery_level >= 30:
-            self._battery_level -= 30
+        if self.battery_level >= 30:
+            self.battery_level -= 30
             self._status = "working"
-            print(f"{self._name} is cooking with {self._cooking_skill} skills.")
+            print(f"{self.name} is cooking with {self.cooking_skill} skills.")
         else:
-            print(f"{self._name} does not have enough battery to cook.")
+            print(f"{self.name} does not have enough battery to cook.")
